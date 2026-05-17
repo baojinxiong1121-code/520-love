@@ -1,0 +1,568 @@
+/* ===== CSS 变量 & 基础 ===== */
+:root {
+  --cream: #FFF8F0;
+  --rose: #E8B4B8;
+  --rose-dark: #C97B84;
+  --rose-light: #F5D5D8;
+  --gold: #C9A96E;
+  --gold-light: #E0D0A8;
+  --text: #4A3F3F;
+  --text-light: #8C7B7B;
+  --white: #FFFFFF;
+  --shadow: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-hover: 0 8px 30px rgba(0,0,0,0.10);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== Canvas 背景 ===== */
+#heartsCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== 音乐开关 ===== */
+.music-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--rose-light);
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.music-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-hover);
+}
+.music-toggle.playing {
+  border-color: var(--rose-dark);
+  background: var(--rose-light);
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+.hero-content {
+  animation: fadeInUp 1.2s ease-out;
+}
+.hero-title {
+  font-size: clamp(48px, 10vw, 88px);
+  font-weight: 700;
+  color: var(--rose-dark);
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+}
+.hero-subtitle {
+  font-size: clamp(16px, 3vw, 20px);
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.hero-heart {
+  font-size: 56px;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+.hero-scroll-hint {
+  margin-top: 40px;
+  color: var(--gold);
+  font-size: 14px;
+  opacity: 0.7;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%  { transform: scale(1.15); }
+  30%  { transform: scale(1); }
+  45%  { transform: scale(1.1); }
+  60%  { transform: scale(1); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%  { transform: translateY(8px); }
+}
+
+/* ===== 容器 ===== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ===== 通用区块 ===== */
+.section {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 48px 36px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.8s ease-out both;
+}
+.section:nth-child(2)  { animation-delay: 0.1s; }
+.section:nth-child(3)  { animation-delay: 0.2s; }
+.section:nth-child(4)  { animation-delay: 0.3s; }
+.section:nth-child(5)  { animation-delay: 0.4s; }
+.section:nth-child(6)  { animation-delay: 0.5s; }
+.section:nth-child(7)  { animation-delay: 0.6s; }
+
+.section-title {
+  font-size: clamp(24px, 5vw, 32px);
+  color: var(--rose-dark);
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 10px auto 0;
+}
+.section-desc {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+/* ===== 按钮 ===== */
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+  color: white;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--rose-dark), #B86B75);
+}
+.btn-secondary {
+  background: var(--white);
+  color: var(--rose-dark);
+  border: 2px solid var(--rose-light);
+}
+.btn-secondary:hover {
+  background: var(--rose-light);
+}
+
+/* ===== 纪念日 ===== */
+.anniversary-box {
+  text-align: center;
+}
+.date-picker-row {
+  margin-bottom: 20px;
+}
+.date-picker-row label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--text-light);
+}
+.date-input {
+  padding: 10px 18px;
+  border: 2px solid var(--rose-light);
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.date-input:focus {
+  border-color: var(--rose);
+}
+.days-result {
+  margin-top: 24px;
+  display: none;
+}
+.days-result.show {
+  display: block;
+  animation: fadeInUp 0.6s ease-out;
+}
+.days-number {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--rose-dark);
+  line-height: 1;
+}
+.days-label {
+  font-size: 20px;
+  color: var(--text-light);
+  margin-left: 4px;
+}
+.days-extra {
+  margin-top: 8px;
+  color: var(--gold);
+  font-size: 15px;
+}
+
+/* ===== 留言 ===== */
+.message-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.input {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 20px;
+  border: 2px solid var(--rose-light);
+  border-radius: 50px;
+  font-size: 15px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus {
+  border-color: var(--rose);
+}
+.msg-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.msg-card {
+  background: linear-gradient(135deg, var(--rose-light), #FBE8EB);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: 15px;
+  color: var(--text);
+  max-width: 260px;
+  word-break: break-word;
+  position: relative;
+  animation: fadeInUp 0.4s ease-out both;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.msg-card .delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  color: var(--text-light);
+}
+.msg-card .delete-btn:hover {
+  opacity: 1;
+}
+.msg-card .msg-date {
+  display: block;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 6px;
+}
+
+/* ===== 照片墙 ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.gallery-card {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  cursor: default;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.gallery-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: var(--shadow-hover);
+}
+.gallery-card .card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.4));
+  color: white;
+  font-size: 13px;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+.gallery-card:hover .card-overlay {
+  transform: translateY(0);
+}
+.gallery-card:nth-child(1) { background: linear-gradient(135deg, #E8B4B8, #D4A0A7); }
+.gallery-card:nth-child(2) { background: linear-gradient(135deg, #C9A96E, #B8924E); }
+.gallery-card:nth-child(3) { background: linear-gradient(135deg, #D4A0A7, #C97B84); }
+.gallery-card:nth-child(4) { background: linear-gradient(135deg, #E0D0A8, #C9A96E); }
+.gallery-card:nth-child(5) { background: linear-gradient(135deg, #F5D5D8, #E8B4B8); }
+.gallery-card:nth-child(6) { background: linear-gradient(135deg, #C97B84, #B86B75); }
+
+/* ===== 翻牌游戏 ===== */
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: var(--text-light);
+}
+.game-stats strong {
+  color: var(--rose-dark);
+}
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto 24px;
+}
+.memory-card {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  position: relative;
+  perspective: 600px;
+}
+.memory-card .card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+.memory-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.memory-card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+.memory-card .card-front,
+.memory-card .card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  backface-visibility: hidden;
+}
+.memory-card .card-front {
+  background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+  color: white;
+}
+.memory-card .card-back {
+  background: var(--white);
+  border: 2px solid var(--rose-light);
+  transform: rotateY(180deg);
+}
+.memory-card.matched .card-back {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, var(--gold-light), #F5ECD7);
+  animation: matchPop 0.4s ease-out;
+}
+@keyframes matchPop {
+  0%   { transform: rotateY(180deg) scale(1); }
+  50%  { transform: rotateY(180deg) scale(1.15); }
+  100% { transform: rotateY(180deg) scale(1); }
+}
+
+/* ===== 问答 ===== */
+.quiz-container {
+  margin-bottom: 20px;
+}
+.quiz-item {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.quiz-item .q-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.quiz-item .q-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.q-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 2px solid var(--rose-light);
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s, border-color 0.2s;
+  user-select: none;
+}
+.q-option:hover {
+  background: var(--rose-light);
+}
+.q-option input {
+  display: none;
+}
+.q-option.selected {
+  background: var(--rose-light);
+  border-color: var(--rose);
+}
+.quiz-result {
+  text-align: center;
+  margin-top: 16px;
+  animation: fadeInUp 0.6s ease-out;
+}
+.result-score {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--rose-dark);
+}
+.result-comment {
+  margin-top: 8px;
+  font-size: 17px;
+  color: var(--gold);
+}
+
+/* ===== 告白文案 ===== */
+.confession-box {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #FFF5F5, #FFF0F3);
+  border: 2px solid var(--rose-light);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out;
+}
+.confession-box p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* ===== Footer ===== */
+.footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 32px 20px;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 600px) {
+  .section {
+    padding: 32px 20px;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .memory-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 300px;
+  }
+  .memory-card .card-front,
+  .memory-card .card-back {
+    font-size: 26px;
+  }
+  .game-stats {
+    gap: 16px;
+    font-size: 13px;
+  }
+  .message-form {
+    flex-direction: column;
+    align-items: center;
+  }
+  .input {
+    width: 100%;
+  }
+  .days-number {
+    font-size: 48px;
+  }
+}

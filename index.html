@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>520 快乐 · 属于我们的时光</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 背景 Canvas（心形飘落） -->
+  <canvas id="heartsCanvas"></canvas>
+
+  <!-- 音乐开关 -->
+  <button id="musicToggle" class="music-toggle" title="背景音乐开关">🎵</button>
+
+  <!-- ========== Hero 顶部 ========== -->
+  <header class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">520 快乐</h1>
+      <p class="hero-subtitle">有幸遇见，恰好合拍。<br>往后的日子，请多指教。</p>
+      <div class="hero-heart">💕</div>
+      <p class="hero-scroll-hint">下滑，慢慢看</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ========== 我们的纪念日 ========== -->
+    <section class="section" id="anniversary">
+      <h2 class="section-title">我们的纪念日</h2>
+      <p class="section-desc">选一个日子，看看我们已经一起走过了多少天。</p>
+      <div class="anniversary-box">
+        <div class="date-picker-row">
+          <label>
+            <span>开始日期</span>
+            <input type="date" id="startDate" class="date-input">
+          </label>
+        </div>
+        <button id="calcDaysBtn" class="btn btn-primary">计算我们在一起的天数</button>
+        <div id="daysResult" class="days-result">
+          <span class="days-number" id="daysNumber">—</span>
+          <span class="days-label">天</span>
+          <p class="days-extra" id="daysExtra"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 心动留言 ========== -->
+    <section class="section" id="messages">
+      <h2 class="section-title">心动留言</h2>
+      <p class="section-desc">写一句想对 TA 说的话吧，每一句都会被好好收藏。</p>
+      <div class="message-form">
+        <input type="text" id="msgInput" class="input" placeholder="比如：今天也很想你…" maxlength="60">
+        <button id="saveMsgBtn" class="btn btn-primary">保存留言</button>
+      </div>
+      <div id="msgCards" class="msg-cards"></div>
+    </section>
+
+    <!-- ========== 照片墙 ========== -->
+    <section class="section" id="gallery">
+      <h2 class="section-title">回忆墙</h2>
+      <p class="section-desc">每一张卡片，都是我们的故事。</p>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- JS 动态生成 6 张占位卡片 -->
+      </div>
+    </section>
+
+    <!-- ========== 游戏 A：翻牌记忆 ========== -->
+    <section class="section" id="memoryGame">
+      <h2 class="section-title">心形连连看</h2>
+      <p class="section-desc">翻牌配对，看看你有多快？</p>
+      <div class="game-stats">
+        <span>步数：<strong id="memMoves">0</strong></span>
+        <span>用时：<strong id="memTimer">00:00</strong></span>
+      </div>
+      <div class="memory-grid" id="memoryGrid"></div>
+      <button id="resetMemoryBtn" class="btn btn-secondary">重新开始</button>
+    </section>
+
+    <!-- ========== 游戏 B：情侣默契问答 ========== -->
+    <section class="section" id="quiz">
+      <h2 class="section-title">情侣默契问答</h2>
+      <p class="section-desc">10 道题，测测你们有多默契～</p>
+      <div id="quizContainer" class="quiz-container"></div>
+      <div id="quizResult" class="quiz-result" style="display:none;">
+        <div class="result-score" id="quizScore"></div>
+        <p class="result-comment" id="quizComment"></p>
+      </div>
+      <button id="submitQuizBtn" class="btn btn-primary">提交答案</button>
+      <button id="resetQuizBtn" class="btn btn-secondary" style="display:none;">再来一次</button>
+    </section>
+
+    <!-- ========== 专属告白 ========== -->
+    <section class="section" id="confession">
+      <h2 class="section-title">专属告白文案</h2>
+      <p class="section-desc">根据你们的默契度，生成一段专属告白。</p>
+      <button id="generateConfessionBtn" class="btn btn-primary">生成告白文案</button>
+      <div id="confessionBox" class="confession-box" style="display:none;">
+        <p id="confessionText"></p>
+        <button id="copyConfessionBtn" class="btn btn-secondary">一键复制</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>520 · 致我们的小时光 💕</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
